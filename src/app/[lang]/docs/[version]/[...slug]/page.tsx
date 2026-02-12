@@ -3,8 +3,12 @@ import { notFound } from "next/navigation";
 import { FeedbackWidget } from "@/components/FeedbackWidget";
 // import { TableOfContents } from "@/components/TableOfContents"; // Optionally add TOC
 import { CodeBlock } from "@/components/CodeBlock";
-import { remark } from "remark";
-import html from "remark-html";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 // Enable ISR
 export const revalidate = 60;
@@ -25,8 +29,12 @@ export default async function DocPage(props: { params: Promise<{ lang: string, v
     if (!doc) notFound();
 
     // Parse markdown content
-    const processedContent = await remark()
-        .use(html)
+    const processedContent = await unified()
+        .use(remarkParse)
+        .use(remarkRehype)
+        .use(rehypeSlug)
+        .use(rehypeAutolinkHeadings)
+        .use(rehypeStringify)
         .process(doc.content);
     const contentHtml = processedContent.toString();
 
@@ -35,13 +43,20 @@ export default async function DocPage(props: { params: Promise<{ lang: string, v
             <div className="flex-1">
                 <h1 className="text-3xl font-bold mb-4">{doc.meta.title}</h1>
 
-                {/* Render content safely */}
-                <div
-                    data-testid="doc-content"
-                    className="prose dark:prose-invert max-w-none"
-                    dangerouslySetInnerHTML={{ __html: contentHtml }}
-                />
 
+                {/* Render content safely with hydration for code blocks */}
+                <CodeBlock htmlContent={contentHtml} />
+
+                <div className="mt-8 text-sm text-gray-500">
+                    <a
+                        href={`https://github.com/nnssprasad97/multi-language-documentation/edit/main/doc-portal/_docs/${params.version}/${params.lang}/${params.slug.join("/")}.md`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline"
+                    >
+                        Edit this page on GitHub
+                    </a>
+                </div>
                 <hr className="my-8" />
                 <FeedbackWidget />
             </div>

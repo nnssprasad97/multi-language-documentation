@@ -6,9 +6,9 @@ const defaultLocale = 'en'
 
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
-  
+
   // Ignore api, static files, etc.
-  if (pathname.startsWith('/_next') || pathname.startsWith('/api') || pathname.startsWith('/static') || pathname.includes('.')) {
+  if (pathname.startsWith('/_next') || pathname.startsWith('/api') || pathname.startsWith('/static') || pathname.includes('.') || pathname.startsWith('/api-reference')) {
     return
   }
 
@@ -25,5 +25,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|api-reference).*)'],
 }
