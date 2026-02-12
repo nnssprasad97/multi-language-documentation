@@ -20,8 +20,36 @@ export function getDocContent(version: string, lang: string, slug: string[]) {
 }
 
 export function getAllDocPaths() {
-    // This would ideally recursively walk the _docs directory
-    // For simplicity, we assume a flat structure or specific nested levels
-    // You must implement directory walking here for robust nested routing
-    return [];
+    const versions = fs.readdirSync(docsDirectory);
+    const paths: { lang: string; version: string; slug: string[] }[] = [];
+
+    versions.forEach((version) => {
+        const versionPath = path.join(docsDirectory, version);
+        if (!fs.statSync(versionPath).isDirectory()) return;
+
+        const langs = fs.readdirSync(versionPath);
+        langs.forEach((lang) => {
+            const langPath = path.join(versionPath, lang);
+            if (!fs.statSync(langPath).isDirectory()) return;
+
+            const walk = (dir: string, currentSlug: string[]) => {
+                const files = fs.readdirSync(dir);
+                files.forEach((file) => {
+                    const filePath = path.join(dir, file);
+                    const stat = fs.statSync(filePath);
+
+                    if (stat.isDirectory()) {
+                        walk(filePath, [...currentSlug, file]);
+                    } else if (file.endsWith('.md')) {
+                        const slug = [...currentSlug, file.replace(/\.md$/, '')];
+                        paths.push({ lang, version, slug });
+                    }
+                });
+            };
+
+            walk(langPath, []);
+        });
+    });
+
+    return paths;
 }
