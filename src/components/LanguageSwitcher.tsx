@@ -14,7 +14,12 @@ export function LanguageSwitcher() {
     return (
         <div data-testid="language-switcher" className="flex gap-2">
             {['en', 'es', 'fr', 'de'].map((lang) => (
-                <button key={lang} onClick={() => changeLanguage(lang)} className="uppercase font-bold text-sm">
+                <button
+                    key={lang}
+                    onClick={() => changeLanguage(lang)}
+                    className="uppercase font-bold text-sm"
+                    data-testid={`language-switcher-option-${lang}`}
+                >
                     {lang}
                 </button>
             ))}

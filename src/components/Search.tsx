@@ -68,7 +68,7 @@ export function Search({ placeholder = "Search..." }: { placeholder?: string }) 
                 />
             </div>
 
-            {results.length > 0 && (
+            {results.length > 0 ? (
                 <div data-testid="search-results" className="absolute top-full left-0 right-0 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded mt-1 shadow-lg z-50">
                     <ul>
                         {results.map((result) => (
@@ -86,6 +86,10 @@ export function Search({ placeholder = "Search..." }: { placeholder?: string }) 
                             </li>
                         ))}
                     </ul>
+                </div>
+            ) : query.length > 0 && (
+                <div data-testid="search-no-results" className="absolute top-full left-0 right-0 bg-white dark:bg-gray-800 border dark:border-gray-600 rounded p-2 mt-1 shadow-lg z-50 text-sm text-gray-500">
+                    No results found.
                 </div>
             )}
         </div>

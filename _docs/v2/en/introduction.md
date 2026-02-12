@@ -1,16 +1,19 @@
 ---
-title: Introduction
-description: Getting started with the new platform version.
+title: Introduction v2
 ---
 
-# Introduction
+# Introduction to Version 2
 
-Welcome to the documentation (v2 - English).
+Welcome to the version 2 documentation. This version introduces new features and improvements.
 
-## Getting Started
+## Features
 
-Run the following command:
+- Feature A
+- Feature B
+- Feature C
+
+## Installation
 
 ```bash
-npm install cool-lib@next
+npm install my-library@v2
 ```

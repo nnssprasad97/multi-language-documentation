@@ -45,7 +45,9 @@ export default async function DocPage(props: { params: Promise<{ lang: string, v
 
 
                 {/* Render content safely with hydration for code blocks */}
-                <CodeBlock htmlContent={contentHtml} />
+                <div data-testid="doc-content">
+                    <CodeBlock htmlContent={contentHtml} />
+                </div>
 
                 <div className="mt-8 text-sm text-gray-500">
                     <a

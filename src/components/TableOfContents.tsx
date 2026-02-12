@@ -48,10 +48,15 @@ export function TableOfContents() {
                             }`}
                         style={{ paddingLeft: (heading.level - 2) * 12 + (activeId === heading.id ? 14 : 0) }}
                     >
-                        <a href={`#${heading.id}`} onClick={(e) => {
-                            e.preventDefault();
-                            document.getElementById(heading.id)?.scrollIntoView({ behavior: "smooth" });
-                        }}>
+                        <a
+                            href={`#${heading.id}`}
+                            data-testid={`toc-link-${heading.id}`}
+                            data-active={activeId === heading.id ? "true" : "false"}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                document.getElementById(heading.id)?.scrollIntoView({ behavior: "smooth" });
+                            }}
+                        >
                             {heading.text}
                         </a>
                     </li>
