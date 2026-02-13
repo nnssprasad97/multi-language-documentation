@@ -9,7 +9,9 @@ export default function ApiReferencePage() {
     return (
         <div className="p-4 bg-white h-screen overflow-y-auto">
             {/* Ensure public/openapi.json exists */}
-            <SwaggerUI url="/openapi.json" />
+            <div className="swagger-ui">
+                <SwaggerUI url="/openapi.json" />
+            </div>
         </div>
     );
 }

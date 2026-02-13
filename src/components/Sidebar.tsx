@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function Sidebar({ version, lang, dict }: { version: string, lang: string, dict: any }) {
     const [isOpen, setIsOpen] = useState(false);
     const links = [

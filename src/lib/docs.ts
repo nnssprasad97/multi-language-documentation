@@ -1,8 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { remark } from 'remark';
-import html from 'remark-html';
 
 const docsDirectory = path.join(process.cwd(), '_docs');
 
@@ -14,7 +12,7 @@ export function getDocContent(version: string, lang: string, slug: string[]) {
         const fileContents = fs.readFileSync(fullPath, 'utf8');
         const { data, content } = matter(fileContents);
         return { slug: realSlug, meta: data, content };
-    } catch (e) {
+    } catch {
         return null;
     }
 }

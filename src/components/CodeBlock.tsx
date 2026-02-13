@@ -1,7 +1,5 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { Copy, Check } from "lucide-react";
-import { useState } from "react";
 
 export function CodeBlock({ htmlContent }: { htmlContent: string }) {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -40,7 +38,7 @@ export function CodeBlock({ htmlContent }: { htmlContent: string }) {
     return (
         <div
             ref={containerRef}
-            data-testid="code-block-wrapper"
+            data-testid="code-block"
             className="prose dark:prose-invert max-w-none"
             dangerouslySetInnerHTML={{ __html: htmlContent }}
         />

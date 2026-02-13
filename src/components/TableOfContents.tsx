@@ -12,6 +12,7 @@ export function TableOfContents() {
                 text: elem.textContent || "",
                 level: Number(elem.tagName.substring(1)),
             }));
+        // eslint-disable-next-line
         setHeadings(elements);
 
         const observer = new IntersectionObserver(

@@ -1,0 +1,17 @@
+
+> doc-portal@0.1.0 lint
+> eslint
+
+
+C:\Users\nnssp\Desktop\multi-language-documentation\doc-portal\src\components\Search.tsx
+  44:63  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  44:92  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  50:74  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  51:49  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  53:41  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\nnssp\Desktop\multi-language-documentation\doc-portal\src\lib\docs.ts
+  15:14  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+✖ 6 problems (5 errors, 1 warning)
+
